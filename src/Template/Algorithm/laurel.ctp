@@ -3,6 +3,7 @@
 <head>
 </head>
 <body>
+	<h3>ローレル指数</h3>
 	<?php
 	echo $this->Form->create(null, array('type' => 'post', 'url' => ['controller' => 'Algorithm', 'action' => 'laurel']));
 	echo "体重";

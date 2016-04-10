@@ -3,6 +3,7 @@
 <head>
 </head>
 <body>
+	<h3>四捨五入</h3>
 	<?php
 	echo $this->Form->create(null, array('type' => 'post', 'url' => ['controller' => 'Algorithm', 'action' => 'round']));
 	echo "四捨五入する値";

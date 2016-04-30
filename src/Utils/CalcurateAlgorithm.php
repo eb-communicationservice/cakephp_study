@@ -7,9 +7,8 @@ namespace App\Utils;
 class CalcurateAlgorithm
 {
 	/*
-	* function 
+	* 四捨五入処理
 	*/
-	// 四捨五入処理
 	public static function calcRound($roundNum, $keta){
 	
 		// 四捨五入したい桁数を整数部分の1桁目移動、0.5を足した後整数化
@@ -23,7 +22,9 @@ class CalcurateAlgorithm
 		return $resultRound;
 	}
 	
-	// ローレル指数計算
+	/*
+	* ローレル指数計算
+	*/
 	public static function calcLaurel($weight, $hight){
 		
 		// ローレル指数計算
@@ -33,10 +34,13 @@ class CalcurateAlgorithm
 		return $resultLaurel;
 	}
 	
-	// ローレル値から体型判定
+	/*
+	* ローレル値から体型判定
+	*/
 	public static function judgeLaurel($resultLaurel){
 		
-		$resultJudge;
+		// 初期値としてローレル指数が160以上出た場合のステータスを設定
+		$resultJudge = "太りすぎ";
 		
 		// 計算結果から体型判定
 		// ローレル指数が100未満の場合
@@ -54,28 +58,23 @@ class CalcurateAlgorithm
 		// ローレル指数が150以上160未満の場合
 		} elseif ($resultLaurel > 149 && $resultLaurel < 160) {
 			$resultJudge = "やや太りぎみ";
-		
-		// ローレル指数が160以上の場合
-		} else {
-			$resultJudge = "太りすぎ";
 		}
 		
 		return $resultJudge;
 	}
 	
-	// 最大公約数計算
+	/*
+	* 最大公約数計算
+	*/
 	public static function calcGcm($num1, $num2){
 		
-		$big;
-		$small;
+		$big = $num2;
+		$small = $num1;
 		
 		// 入力値の大小判定
 		if ($num1 > $num2) {
 			$big = $num1;
 			$small = $num2;
-		} else {
-			$big = $num2;
-			$small = $num1;
 		}
 		
 		// 大きい値/小さい値の余りが0になるまで繰り返し処理
@@ -92,7 +91,9 @@ class CalcurateAlgorithm
 		return $small;
 	}
 	
-	// 最小公倍数計算
+	/*
+	* 最小公倍数計算
+	*/
 	public static function calcLcm($num1, $num2){
 		
 		$gcm = CalcurateAlgorithm::calcGcm($num1, $num2);

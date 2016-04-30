@@ -13,7 +13,9 @@
 	echo $this->Form->submit('送信');
 	echo $this->Form->end();
 	
-	echo "最大公約数 ： " . $resultGcm;
+	echo '<font color="#FF0000">' . $errorMsg . '</font>';
+	
+	echo "<br />最大公約数 ： " . $resultGcm;
 	?>
 </body>
 </html>

@@ -13,7 +13,9 @@
 	echo $this->Form->submit('送信');
 	echo $this->Form->end();
 	
-	echo "最小公倍数 ： " . $resultLcm;
+	echo '<font color="#FF0000">' . $errorMsg . '</font>';
+	
+	echo "<br />最小公倍数 ： " . $resultLcm;
 	?>
 </body>
 </html>

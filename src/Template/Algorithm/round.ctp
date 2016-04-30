@@ -13,7 +13,8 @@
 	echo $this->Form->submit('送信');
 	echo $this->Form->end();
 	
-	echo "結果 ： " . $resultRound;
+	echo '<font color="#FF0000">' . $errorMsg . '</font>';
+	echo "<br />結果 ： " . $resultRound;
 	?>
 </body>
 </html>

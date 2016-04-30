@@ -13,7 +13,9 @@
 	echo $this->Form->submit('送信');
 	echo $this->Form->end();
 	
-	echo "ローレル指数 ： " . $laurel . "</br>";
+	echo '<font color="#FF0000">' . $errorMsg . '</font>';
+	
+	echo "<br />ローレル指数 ： " . $resultLaurel . "</br>";
 	echo "判定結果     ： " . $resultJudge;
 	?>
 </body>

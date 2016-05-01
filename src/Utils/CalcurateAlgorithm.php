@@ -96,10 +96,30 @@ class CalcurateAlgorithm
 	*/
 	public static function calcLcm($num1, $num2){
 		
+		// 最大公約数を求める
 		$gcm = CalcurateAlgorithm::calcGcm($num1, $num2);
 		
+		// 入力値を掛けた値を最大公約数で割る
 		$resultLcm = ($num1 * $num2) / $gcm;
 		
 		return $resultLcm;
+	}
+	
+	/*
+	* 階乗計算
+	*/
+	public static function calcFactorial($factorialNum){
+		
+		// 階乗結果を入れる変数に、初期値として1を設定しておく
+		$resultFactorial = 1;
+		
+		// 入力値として得た階乗する値分繰り返し処理
+		for ($i = 2; $i <= $factorialNum; $i++) {
+			
+			// 処理回数（2～$factorialNum）を順番に掛け算を行う
+			$resultFactorial *= $i;
+		}
+		
+		return $resultFactorial;
 	}
 }

@@ -187,4 +187,44 @@ class AlgorithmController extends AppController
 			$this->set('resultLcm', $resultLcm);
 		}
     }
+
+	/*
+	* 5.階乗
+	*/
+	public function factorial(){
+		
+		// フォームから値を取得
+		$inputArray = array('factorialNum' => $this->request->data('factorialNum'));
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 正の整数判定実行
+		$isPositiveInteger = Validate::isPositiveInteger($inputArray);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// エラーメッセージ出力
+			$this->set('errorMsg', "全ての項目に値を入力して下さい");
+			$this->set('resultFactorial', "");
+		
+		// 正の整数ではない値が含まれている場合
+		} elseif (!$isPositiveInteger) {
+			
+			// エラーメッセージ入力
+			$this->set('errorMsg', "正の整数を入力して下さい");
+			$this->set('resultFactorial', "");
+		
+		// 入力値が正の整数の場合
+		} else {
+			
+			// 指数計算実行
+			$resultFactorial = CalcurateAlgorithm::calcFactorial($inputArray['factorialNum']);
+			
+			// viewに結果を送信
+			$this->set('errorMsg', "");
+			$this->set('resultFactorial', $resultFactorial);
+		}
+    }
 }

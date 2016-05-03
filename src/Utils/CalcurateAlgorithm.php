@@ -35,35 +35,6 @@ class CalcurateAlgorithm
 	}
 	
 	/*
-	* ローレル値から体型判定
-	*/
-	public static function judgeLaurel($resultLaurel){
-		
-		// 初期値としてローレル指数が160以上出た場合のステータスを設定
-		$resultJudge = "太りすぎ";
-		
-		// 計算結果から体型判定
-		// ローレル指数が100未満の場合
-		if ($resultLaurel < 100) {
-			$resultJudge = "痩せすぎ";
-		
-		// ローレル指数が100以上115未満の場合
-		} elseif ($resultLaurel > 99 && $resultLaurel < 115) {
-			$resultJudge = "やや痩せすぎ";
-		
-		// ローレル指数が115以上150未満の場合
-		} elseif ($resultLaurel > 114 && $resultLaurel < 150) {
-			$resultJudge = "平均";
-		
-		// ローレル指数が150以上160未満の場合
-		} elseif ($resultLaurel > 149 && $resultLaurel < 160) {
-			$resultJudge = "やや太りぎみ";
-		}
-		
-		return $resultJudge;
-	}
-	
-	/*
 	* 最大公約数計算
 	*/
 	public static function calcGcm($num1, $num2){
@@ -121,5 +92,38 @@ class CalcurateAlgorithm
 		}
 		
 		return $resultFactorial;
+	}
+	
+	/*
+	* 素数計算
+	*/
+	public static function calcPrime($primeArray){
+		
+		// 結果を代入する変数に、空を初期値として代入しておく
+		$resultPrime = "";
+		
+		// 2～100の平方根まで以下の処理を繰り返す
+		for ($i = 2; $i <= sqrt(100); $i++) {
+			
+			// iの倍数を繰り返し判定する（素数判定）
+			for ($j = $i * 2; $j <= 100; $j += $i) {
+				
+				// iの倍数は素数ではないため、印として該当箇所の値に1を代入
+				$primeArray[$j] = 1;
+			}
+		}
+		
+		// 結果の格納
+		for ($k = 2; $k <= 100; $k++) {
+			
+			// 配列の値が0（＝素数）の場合
+			if ($primeArray[$k] == 0) {
+				
+				// 該当する配列の番号を結果の変数に代入
+				$resultPrime = $resultPrime . $k . ", ";
+			}
+		}
+		
+		return $resultPrime;
 	}
 }

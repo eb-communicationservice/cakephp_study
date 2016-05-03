@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use App\Utils\CalcurateAlgorithm;
 use App\Utils\Validate;
+use App\Utils\AlgorithmUtils;
 
 class AlgorithmController extends AppController
 {
@@ -97,7 +98,7 @@ class AlgorithmController extends AppController
 			// ローレル指数の計算実行
 			$resultLaurel = CalcurateAlgorithm::calcLaurel($inputArray['weight'], $inputArray['hight']);
 			
-			$resultJudge = CalcurateAlgorithm::judgeLaurel($resultLaurel);
+			$resultJudge = AlgorithmUtils::judgeLaurel($resultLaurel);
 			
 			// viewに結果を送信
 			$this->set('errorMsg', "");
@@ -226,5 +227,41 @@ class AlgorithmController extends AppController
 			$this->set('errorMsg', "");
 			$this->set('resultFactorial', $resultFactorial);
 		}
+	}
+	
+	/*
+	* 6.素数（エラストテネスのふるい）
+	*/
+	public function prime(){
+		
+		// 配列の2～100までに0の値を格納する
+		$primeArray = array_fill(2,100,0);
+		
+		// 素数計算実行
+		$resultPrime = CalcurateAlgorithm::calcPrime($primeArray);
+		
+		// viewに結果を送信
+		$this->set('resultPrime', $resultPrime);
+    }
+   
+    /*
+	* 7.データの種類
+	*/
+	public function dataType(){
+		
+		// 任意の値を配列に格納（判定する数値データ）
+		$numArray = array(10, 60, 20, 40, 60, 50, 20, 80, 60, 40);
+		
+		// データタイプの初期値として、0を上記任意値の数分配列に格納
+		$cntArray = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		
+		// 1行目を判定数値データ、2行目にデータタイプを設定
+		$dataList = array($numArray, $cntArray);
+		
+		// データ種類判定実行
+		$resultDataTypeList = AlgorithmUtils::judgeDataType($dataList);
+		
+		// viewに結果を送信
+		$this->set('resultDataTypeList', $resultDataTypeList);
     }
 }

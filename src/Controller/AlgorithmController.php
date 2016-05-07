@@ -264,4 +264,53 @@ class AlgorithmController extends AppController
 		// viewに結果を送信
 		$this->set('resultDataTypeList', $resultDataTypeList);
     }
+    
+    	/*
+	* 8.奇数の魔方陣
+	*/
+	public function magicSquare(){
+		
+		// フォームから値を取得
+		$inputArray = array('magicSquareNum' => $this->request->data('magicSquareNum'));
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 正の整数判定実行
+		$isPositiveInteger = Validate::isPositiveInteger($inputArray);
+		
+		// 奇数判定実行
+		$isOdd = Validate::isOdd($inputArray);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// エラーメッセージ出力
+			$this->set('errorMsg', "全ての項目に値を入力して下さい");
+			$this->set('resultMagicSquare', "");
+		
+		// 正の整数ではない値が含まれている場合
+		} elseif (!$isPositiveInteger) {
+			
+			// エラーメッセージ入力
+			$this->set('errorMsg', "正の整数を入力して下さい");
+			$this->set('resultMagicSquare', "");
+		
+		} else if (!$isOdd) {
+			
+			// エラーメッセージ入力
+			$this->set('errorMsg', "奇数を入力して下さい");
+			$this->set('resultMagicSquare', "");
+		
+		// 入力値が自然数で奇数の場合
+		} else {
+			
+			// 魔方陣実行
+			$resultMagicSquare = AlgorithmUtils::makeMagicSquare($inputArray['magicSquareNum']);
+			
+			// viewに結果を送信
+			$this->set('errorMsg', "");
+			$this->set('resultMagicSquare', $resultMagicSquare);
+		}
+	}
 }

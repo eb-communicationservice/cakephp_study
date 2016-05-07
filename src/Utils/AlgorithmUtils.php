@@ -72,4 +72,57 @@ class AlgorithmUtils
 		// 四捨五入結果を返す
 		return $dataList;
 	}
+	
+	/*
+	* 8.奇数の魔方陣
+	* 魔方陣生成
+	*/
+	public static function makeMagicSquare($magicSquareNum){
+		
+		// 最初の値(1)を格納する列番号を設定(全体列数の真ん中)
+		$column = (int)($magicSquareNum / 2);
+		
+		// 最初の値(1)を格納する行番号を設定(一番上)
+		$row = 0;
+		
+		// 最初の値(1)を指定した場所に格納
+		$magicSquareArray[$row][$column] = 1;
+		
+		// 存在するマス数分繰り返し、初期値以外の値を格納していく
+		for ($i = 2; $i <= pow($magicSquareNum, 2); $i++) {
+			
+			// 格納する値÷入力値の余りが1である場合
+			if ($i % $magicSquareNum == 1) {
+				
+				// 前回格納した場所の下になるよう行を指定
+				$row += 1;
+			
+			// 格納する値÷入力値の余りが1以外の場合
+			} else {
+				
+				// 前回格納した場所の右上になるよう行、列を指定
+				$row -= 1;
+				$column += 1;
+			}
+			
+			// 指定した行が0行目より上にある場合
+			if ($row < 0) {
+				
+				// 同じ列の一番下に格納できるように行を指定
+				$row = $magicSquareNum - 1;
+			}
+			
+			// 指定した列が入力した値の列数より右にある場合
+			if ($column > ($magicSquareNum - 1)) {
+				
+				// 同じ行の先頭列に格納できるように列を指定
+				$column = 0;
+			}
+			
+			// 指定した場所に格納する値を格納
+			$magicSquareArray[$row][$column] = $i;
+		}
+		
+		return $magicSquareArray;
+	}
 }

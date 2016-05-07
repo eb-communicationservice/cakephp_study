@@ -113,4 +113,30 @@ class Validate
 		// 判定結果を返す
 		return $isPositiveInteger;
 	}
+	
+	/*
+	* 奇数判定
+	* true = 奇数, false = 偶数
+	*/
+	public static function isOdd($inputArray){
+		
+		$isOdd = true;
+		
+		// 引数の配列にある値（入力値）を繰り返し判定
+		foreach((array)$inputArray as $inputKey => $inputValue) {
+			
+			// 入力値が偶数の場合
+			if ($inputValue % 2 == 0) {
+				
+				// 判定結果を偶数（false）に変更
+				$isOdd =false;
+				
+				// 偶数であった時点でループを抜ける
+				break;
+			}
+		}
+		
+		// 判定結果を返す
+		return $isOdd;
+	}
 }

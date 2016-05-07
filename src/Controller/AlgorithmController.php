@@ -265,7 +265,7 @@ class AlgorithmController extends AppController
 		$this->set('resultDataTypeList', $resultDataTypeList);
     }
     
-    	/*
+	/*
 	* 8.奇数の魔方陣
 	*/
 	public function magicSquare(){

@@ -12,11 +12,8 @@ class CalcurateAlgorithm
 	public static function calcRound($roundNum, $keta){
 	
 		// 四捨五入したい桁数を整数部分の1桁目移動、0.5を足した後整数化
-		$resultRound = (int)($roundNum * (pow(10, $keta)) + 0.5);
-		$keta2 = pow(10, $keta);
-		
-		// 元の少数点位置に戻す
-		$resultRound /= (pow(10, $keta));
+		// 整数化後、元の少数点位置に戻す
+		$resultRound = ((int)($roundNum * (pow(10, $keta - 1)) + 0.5)) / (pow(10, $keta - 1));
 		
 		// 四捨五入結果を返す
 		return $resultRound;

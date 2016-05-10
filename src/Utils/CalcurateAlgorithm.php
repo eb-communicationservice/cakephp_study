@@ -94,7 +94,10 @@ class CalcurateAlgorithm
 	/*
 	* 素数計算
 	*/
-	public static function calcPrime($primeArray){
+	public static function calcPrime($startValue, $endValue){
+		
+		// 引数を使い、配列startValue～endValueまでに0を格納する
+		$primeArray = array_fill($startValue, $endValue, 0);
 		
 		// 結果を代入する変数に、空を初期値として代入しておく
 		$resultPrime = "";

@@ -234,11 +234,12 @@ class AlgorithmController extends AppController
 	*/
 	public function prime(){
 		
-		// 配列の2～100までに0の値を格納する
-		$primeArray = array_fill(2,100,0);
+		// セットする配列の始まりと終わりを決める（今回は2～100）
+		$startValue = 2;
+		$endValue = 100;
 		
 		// 素数計算実行
-		$resultPrime = CalcurateAlgorithm::calcPrime($primeArray);
+		$resultPrime = CalcurateAlgorithm::calcPrime($startValue,$endValue);
 		
 		// viewに結果を送信
 		$this->set('resultPrime', $resultPrime);

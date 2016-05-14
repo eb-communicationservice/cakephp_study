@@ -314,4 +314,44 @@ class AlgorithmController extends AppController
 			$this->set('resultMagicSquare', $resultMagicSquare);
 		}
 	}
+	
+	/*
+	* 9.実数の指数表現
+	*/
+	public function normalization(){
+		
+		// フォームから値を取得
+		$inputArray = array('indexNum' => $this->request->data('indexNum'));
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 数字判定実行
+		$isNumeric = Validate::isNumeric($inputArray);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// エラーメッセージ出力
+			$this->set('errorMsg', "全ての項目に値を入力して下さい");
+			$this->set('resultNormalization', "");
+		
+		// 入力値に数字ではない値が含まれている場合
+		} elseif (!$isNumeric) {
+			
+			// エラーメッセージ入力
+			$this->set('errorMsg', "数字を入力して下さい");
+			$this->set('resultNormalization', "");
+		
+		// 入力値数字の場合
+		} else {
+			
+			// 正規化実行
+			$resultNormalization = CalcurateAlgorithm::calcNormalization($inputArray['indexNum']);
+			
+			// viewに結果を送信
+			$this->set('errorMsg', "");
+			$this->set('resultNormalization', $resultNormalization);
+		}
+	}
 }

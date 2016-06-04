@@ -139,4 +139,29 @@ class Validate
 		// 判定結果を返す
 		return $isOdd;
 	}
+	
+	/*
+	* リストに指定値が存在するか判定
+	* true = 存在する, false = 存在しない
+	*/
+	public static function isExistInList($inputValue, $list){
+		
+		$isExistInList = false;
+		
+		// 判定対象のリストを繰り返して判定
+		foreach((array)$list as $listKey => $listValue) {
+			
+			// 入力値が判定対象リスト内に存在する場合
+			if ($listKey == $inputValue) {
+				
+				// 判定結果を存在する（true）に変更
+				$isExistInList = true;
+				
+				break;
+			}
+		}
+		
+		// 判定結果を返す
+		return $isExistInList;
+	}
 }

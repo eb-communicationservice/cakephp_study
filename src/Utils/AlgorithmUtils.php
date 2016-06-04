@@ -125,4 +125,33 @@ class AlgorithmUtils
 		
 		return $magicSquareArray;
 	}
+	
+	/*
+	* 10.駅間の距離
+	* 駅間の距離算出
+	*/
+	public static function stationDistance($stationList, $startStation, $endStation){
+		
+		// 駅名と距離のリストを繰り返し確認する
+		foreach($stationList as $stationName => $distance) {
+			
+			// 入力値（駅名①）がリストに存在した場合
+			if ($startStation == $stationName) {
+				
+				// 対象駅名の距離を開始距離として変数に代入する
+				$startDistance = $distance;
+			
+			// 入力値（駅名②）がリストに存在した場合
+			} elseif ($endStation == $stationName) {
+				
+				// 対象駅名の距離を終了距離として変数に代入する
+				$endDistance = $distance;
+			}
+		}
+		
+		// 開始距離から終了距離を引いて出てきた距離の絶対値を求めて、算出結果用の変数に代入する
+		$stationDistance = abs($startDistance - $endDistance);
+		
+		return $stationDistance;
+	}
 }

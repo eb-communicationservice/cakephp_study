@@ -126,4 +126,44 @@ class CalcurateAlgorithm
 		
 		return $resultPrime;
 	}
+	
+	/*
+	* 実数の指数表現
+	*/
+	public static function calcNormalization($indexNum){
+		
+		// 乗数を初期化
+		$power = 0;
+		
+		$resultIndexNum = $indexNum;
+		
+		// 入力値の絶対値が0.1以上、または1.0以下になるまで繰り返し処理
+		while (abs($resultIndexNum) < 0.1 || abs($resultIndexNum) > 1.0) {
+			
+			// 入力値の絶対値が1.0以上の場合
+			if (abs($resultIndexNum) >= 1.0) {
+				
+				// 入力値を10で割る
+				$resultIndexNum /= 10;
+				
+				// 10で割るごとで乗数に1を足す
+				$power += 1;
+			
+			// 入力値の絶対値が1.0より下の場合
+			} else {
+				
+				// 入力値を10で掛ける
+				$resultIndexNum *= 10;
+				
+				// 10で掛けるごとで乗数に1を引く
+				$power -= 1;
+			
+			}
+		}
+		
+		// 指数表現した結果を変数に代入
+		$resultNormalization = $resultIndexNum . " E " . $power;
+		
+		return $resultNormalization;
+	}
 }

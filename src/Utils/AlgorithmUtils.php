@@ -140,10 +140,9 @@ class AlgorithmUtils
 				
 				// 対象駅名の距離を開始距離として変数に代入する
 				$startDistance = $distance;
-			}
 			
 			// 入力値（駅名②）がリストに存在した場合
-			if ($endStation == $stationName) {
+			} elseif ($endStation == $stationName) {
 				
 				// 対象駅名の距離を終了距離として変数に代入する
 				$endDistance = $distance;

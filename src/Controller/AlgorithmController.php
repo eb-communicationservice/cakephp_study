@@ -314,4 +314,100 @@ class AlgorithmController extends AppController
 			$this->set('resultMagicSquare', $resultMagicSquare);
 		}
 	}
+	
+	/*
+	* 9.実数の指数表現
+	*/
+	public function normalization(){
+		
+		// フォームから値を取得
+		$inputArray = array('indexNum' => $this->request->data('indexNum'));
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 数字判定実行
+		$isNumeric = Validate::isNumeric($inputArray);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// エラーメッセージ出力
+			$this->set('errorMsg', "全ての項目に値を入力して下さい");
+			$this->set('resultNormalization', "");
+		
+		// 入力値に数字ではない値が含まれている場合
+		} elseif (!$isNumeric) {
+			
+			// エラーメッセージ入力
+			$this->set('errorMsg', "数字を入力して下さい");
+			$this->set('resultNormalization', "");
+		
+		// 入力値数字の場合
+		} else {
+			
+			// 正規化実行
+			$resultNormalization = CalcurateAlgorithm::calcNormalization($inputArray['indexNum']);
+			
+			// viewに結果を送信
+			$this->set('errorMsg', "");
+			$this->set('resultNormalization', $resultNormalization);
+		}
+	}
+	
+	/*
+	* 10.駅間の距離
+	*/
+	public function stationDistance(){
+		
+		// フォームから値を取得
+		$inputArray = array('startStation' => $this->request->data('startStation'),
+							'endStation' => $this->request->data('endStation'));
+		
+		// 駅名と距離の配列を定義
+		$stationList = array('森岡' => 535.3,
+							'木巻' => 500.0,
+							'西上' => 487.5,
+							'栗駒' => 416.2,
+							'新川' => 395.0,
+							'富島' => 272.8,
+							'白川' => 185.4,
+							'野宮' => 109.5,
+							'小宮' => 30.3,
+							'西京' => 0.0);
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 入力値（駅名①）がリストに存在するかの判定実行
+		$isExistStartStation = Validate::isExistInList($inputArray['startStation'], $stationList);
+		
+		// 入力値（駅名②）がリストに存在するかの判定実行
+		$isExistendStation = Validate::isExistInList($inputArray['endStation'], $stationList);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// エラーメッセージ出力
+			$this->set('errorMsg', "全ての項目に値を入力して下さい");
+			$this->set('stationDistance', "");
+		
+		// リストに存在しない入力値が来た場合
+		} elseif (!$isExistStartStation || !$isExistendStation) {
+			
+			// エラーメッセージ入力
+			$this->set('errorMsg', "リストに存在しない駅名が入力されています。");
+			$this->set('stationDistance', "");
+		
+		// 入力値に問題がない場合
+		} else {
+			
+			// 駅間距離算出実行
+			$stationDistance = algorithmUtils::stationDistance($stationList, $inputArray['startStation'], $inputArray['endStation']);
+			
+			// viewに結果を送信
+			$this->set('errorMsg', "");
+			$this->set('stationDistance', $stationDistance);
+		}
+	}
 }

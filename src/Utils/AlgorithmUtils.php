@@ -154,4 +154,35 @@ class AlgorithmUtils
 		
 		return $stationDistance;
 	}
+	
+	/*
+	* 11.逐次探索
+	* 逐次探索実行
+	*/
+	public static function exeSeqSearch($seqSearchNum, $numArray){
+		
+		$resultSeqSearch = 0;
+		
+		// 探索を行う配列を生成
+		// コントローラーから渡された配列を探索用の配列に代入
+		$seqSearchNumArray = $numArray;
+		// 配列の一番最後に入力値を追加
+		array_push($seqSearchNumArray, $seqSearchNum);
+		
+		// 配列の値と入力値が等しくなるまで繰り返し実行
+		while ($seqSearchNumArray[$resultSeqSearch] != $seqSearchNum) {
+			
+			// 隣の配列値をみるために1追加
+			$resultSeqSearch += 1;
+		}
+		
+		// 配列と入力値の値が等しくなる位置が、配列の一番最後（入力値を追加した位置）だった場合
+		if ($resultSeqSearch == count($seqSearchNumArray) - 1) {
+			
+			// 配列内には入力値がなかったということで、-1を結果に代入
+			$resultSeqSearch = -1;
+		}
+		
+		return $resultSeqSearch;
+	}
 }

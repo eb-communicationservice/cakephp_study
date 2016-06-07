@@ -10,10 +10,10 @@
 		echo "<tr>";
 		
 		// 探索する配列の値を取得
-		for($i = 0; $i < count($numArray); $i++) {
+		foreach ($numArray as $numValue) {
 			
 			// 値を表示
-			echo "<td>" . $numArray[$i] . "</td>";;
+			echo "<td> $numValue </td>";
 		}
 		echo "</tr>";
 	echo "</table>";
@@ -25,7 +25,7 @@
 	echo $this->Form->end();
 	
 	// エラー文言表示
-	echo '<font color="#FF0000">' . $errorMsg . '</font>';
+	echo "<font color='#FF0000'> $errorMsg </font>";
 	
 	// 探索結果の値を表示
 	echo "<br />探索結果：" . $resultSeqSearch;

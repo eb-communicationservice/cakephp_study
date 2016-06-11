@@ -455,4 +455,49 @@ class AlgorithmController extends AppController
 			$this->set('resultSeqSearch', $resultSeqSearch);
 		}
     }
+    
+    /*
+	* 12.数の挿入
+	*/
+	public function insert(){
+		
+		$insertArray = array(94, 84, 76, 65, 58);
+		
+		// フォームから値を取得
+		$inputArray = array('insertNum' => $this->request->data('insertNum'));
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 数字判定実行
+		$isNumeric = Validate::isNumeric($inputArray);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// エラーメッセージ出力
+			$this->set('insertArray', $insertArray);
+			$this->set('errorMsg', "値を入力して下さい");
+			$this->set('resultInsertArray', "");
+		
+		// 入力値に数字ではない値が含まれている場合
+		} elseif (!$isNumeric) {
+			
+			// エラーメッセージ入力
+			$this->set('insertArray', $insertArray);
+			$this->set('errorMsg', "数字を入力して下さい");
+			$this->set('resultInsertArray', "");
+		
+		// 入力値数字の場合
+		} else {
+			
+			// 数の挿入実行
+			$resultInsertArray = AlgorithmUtils::exeInsert($inputArray['insertNum'], $insertArray);
+			
+			// viewに結果を送信
+			$this->set('insertArray', $insertArray);
+			$this->set('errorMsg', "");
+			$this->set('resultInsertArray', $resultInsertArray);
+		}
+    }
 }

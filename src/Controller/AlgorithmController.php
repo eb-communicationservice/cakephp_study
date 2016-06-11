@@ -410,4 +410,49 @@ class AlgorithmController extends AppController
 			$this->set('stationDistance', $stationDistance);
 		}
 	}
+	
+	/*
+	* 11.逐次探索
+	*/
+	public function sequentialSearch(){
+		
+		$numArray = array(1, 8, 10, 2, -5, 4);
+		
+		// フォームから値を取得
+		$inputArray = array('seqSearchNum' => $this->request->data('seqSearchNum'));
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 数字判定実行
+		$isNumeric = Validate::isNumeric($inputArray);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// エラーメッセージ出力
+			$this->set('numArray', $numArray);
+			$this->set('errorMsg', "値を入力して下さい");
+			$this->set('resultSeqSearch', "");
+		
+		// 入力値に数字ではない値が含まれている場合
+		} elseif (!$isNumeric) {
+			
+			// エラーメッセージ入力
+			$this->set('numArray', $numArray);
+			$this->set('errorMsg', "数字を入力して下さい");
+			$this->set('resultSeqSearch', "");
+		
+		// 入力値数字の場合
+		} else {
+			
+			// 逐次探索実行
+			$resultSeqSearch = AlgorithmUtils::exeSeqSearch($inputArray['seqSearchNum'], $numArray);
+			
+			// viewに結果を送信
+			$this->set('numArray', $numArray);
+			$this->set('errorMsg', "");
+			$this->set('resultSeqSearch', $resultSeqSearch);
+		}
+    }
 }

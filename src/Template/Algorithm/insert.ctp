@@ -33,8 +33,8 @@
 		echo "<tr>";
 		
 		// 挿入結果配列の値を取得
-		// 帰ってきた結果が配列の場合
-		if (is_array($resultInsertArray)) {
+		// エラーメッセージが空であった場合
+		if (empty($errorMsg)) {
 			
 			// 順番に値を表示させる
 			foreach ($resultInsertArray as $resultInsertValue) {
@@ -43,11 +43,10 @@
 				echo "<td> $resultInsertValue </td>";
 			}
 		
-		// 帰ってきた結果が配列ではない場合
+		// エラーメッセージが空でない場合
 		} else {
 			
-			// 帰ってきた値を表示
-			echo $resultInsertArray;
+			// なにも表示しない
 		}
 		echo "</tr>";
 	echo "</table>";

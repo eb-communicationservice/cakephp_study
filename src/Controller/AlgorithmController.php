@@ -472,21 +472,20 @@ class AlgorithmController extends AppController
 		// 数字判定実行
 		$isNumeric = Validate::isNumeric($inputArray);
 		
+		// 挿入する配列をviewにセット
+		$this->set('insertArray', $insertArray);
+		
 		// 入力値に空が含まれている場合
 		if (!$isEmpty) {
 			
 			// エラーメッセージ出力
-			$this->set('insertArray', $insertArray);
 			$this->set('errorMsg', "値を入力して下さい");
-			$this->set('resultInsertArray', "");
 		
 		// 入力値に数字ではない値が含まれている場合
 		} elseif (!$isNumeric) {
 			
 			// エラーメッセージ入力
-			$this->set('insertArray', $insertArray);
 			$this->set('errorMsg', "数字を入力して下さい");
-			$this->set('resultInsertArray', "");
 		
 		// 入力値数字の場合
 		} else {
@@ -495,7 +494,6 @@ class AlgorithmController extends AppController
 			$resultInsertArray = AlgorithmUtils::exeInsert($inputArray['insertNum'], $insertArray);
 			
 			// viewに結果を送信
-			$this->set('insertArray', $insertArray);
 			$this->set('errorMsg', "");
 			$this->set('resultInsertArray', $resultInsertArray);
 		}

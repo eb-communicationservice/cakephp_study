@@ -200,8 +200,8 @@ class AlgorithmUtils
 		// 配列の要素と挿入したい値の大小関係を順番に見ていく
 		for ($i = count($resultInsertArray) - 1; $i >= 0; $i--) {
 			
-			// 配列の一番後ろに前の場所に格納されている値をコピー
-			$resultInsertArray[$i +1] = $resultInsertArray[$i];
+			// 指定の配列番号の１つ後ろに、指定の配列番号に格納されている値をコピー
+			$resultInsertArray[$i + 1] = $resultInsertArray[$i];
 			
 			// 現在見ている配列要素の値が挿入したい値より大きい場合
 			if ($resultInsertArray[$i] > $insertNum) {

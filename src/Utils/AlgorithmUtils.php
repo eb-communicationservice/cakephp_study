@@ -186,4 +186,40 @@ class AlgorithmUtils
 		
 		return $resultSeqSearch;
 	}
+	
+	/*
+	* 12.数の挿入
+	* 数の挿入実行
+	*/
+	public static function exeInsert($insertNum, $insertArray){
+		
+		// 数挿入の結果を表示する配列を生成
+		// コントローラーから渡された配列を結果格納用の配列に代入
+		$resultInsertArray = $insertArray;
+		
+		// 配列の要素と挿入したい値の大小関係を順番に見ていく
+		for ($i = count($resultInsertArray) - 1; $i >= 0; $i--) {
+			
+			// 指定の配列番号の１つ後ろに、指定の配列番号に格納されている値をコピー
+			$resultInsertArray[$i + 1] = $resultInsertArray[$i];
+			
+			// 現在見ている配列要素の値が挿入したい値より大きい場合
+			if ($resultInsertArray[$i] > $insertNum) {
+				
+				// コピーした場所に挿入したい値を代入
+				$resultInsertArray[$i + 1] = $insertNum;
+				
+				// 挿入し終わったらfor文を抜ける
+				break;
+			
+			// 配列の先頭まで繰り返されていた場合
+			}elseif ($i == 0) {
+				
+				// 挿入したい値が一番大きいため、先頭に代入
+				$resultInsertArray[$i] = $insertNum;
+			}
+		}
+		
+		return $resultInsertArray;
+	}
 }

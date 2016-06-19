@@ -28,12 +28,13 @@
 	echo "<font color='#FF0000'> $errorMsg </font>";
 	
 	// 探索結果を表示
+	echo "<br />探索結果";
 	
 	// エラーメッセージが空であった場合
 	if (empty($errorMsg)) {
 		
 		// 値を表示
-		echo $resultSearch;
+		echo "<br /> $resultSearch";
 	
 	// エラーメッセージが空でない場合
 	} else {

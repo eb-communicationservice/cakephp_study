@@ -222,4 +222,43 @@ class AlgorithmUtils
 		
 		return $resultInsertArray;
 	}
+	
+	/*
+	* 14.シーザー暗号
+	* シーザー暗号実行
+	*/
+	public static function exeCaesarCipher($msg){
+		
+		// アルファベットのシーザー暗号表を作成する（'アルファベット' => '暗号文字'）
+		$cipherTable = ['A' => 'X', 'B' => 'Y', 'C' => 'Z',
+						'D' => ' ', 'E' => 'A', 'F' => 'B',
+						'G' => 'C', 'H' => 'D', 'I' => 'E',
+						'J' => 'F', 'K' => 'G', 'L' => 'H',
+						'M' => 'I', 'N' => 'J', 'O' => 'K',
+						'P' => 'L', 'Q' => 'M', 'R' => 'N',
+						'S' => 'O', 'T' => 'P', 'U' => 'Q',
+						'V' => 'R', 'W' => 'S', 'X' => 'T',
+						'Y' => 'U', 'Z' => 'V', ' ' => 'W',
+		];
+		
+		// 結果を格納する変数の初期化
+		$afterCipherMsg = "";
+		
+		// 引数の文字を一文字ずつ分解して判定
+		foreach (str_split($msg) as $msgVal) {
+			
+			// 対象の文字をシーザー暗号表と照らし合わせる
+			foreach ($cipherTable as $alpha => $cipherVal) {
+				
+				// 対象の文字のアルファベットがあった場合
+				if ($msgVal == $alpha) {
+					
+					// そのアルファベットに対応する暗号文字を結果に入れる
+					$afterCipherMsg = $afterCipherMsg . $cipherVal;
+				}
+			}
+		}
+		
+		return $afterCipherMsg;
+	}
 }

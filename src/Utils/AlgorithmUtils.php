@@ -270,4 +270,30 @@ class AlgorithmUtils
 		
 		return $resultSearch;
 	}
+	
+	/*
+	* 16.交換法
+	* 交換法実行
+	*/
+	public static function execChangeSort($sortArray){
+		
+		// 配列内の値の数分繰り返しソート判定実行
+		for ($i = 0; $i < count($sortArray); $i++) {
+			
+			// 注目している値以降にある値にを繰り返し比較
+			for ($j = $i + 1; $j < count($sortArray); $j++) {
+				
+				// 注目している値が比較する値よりも小さい場合
+				if ($sortArray[$i] < $sortArray[$j]) {
+					
+					// 注目している値と比較している値の位置を交換
+					$swap = $sortArray[$i];
+					$sortArray[$i] = $sortArray[$j];
+					$sortArray[$j] = $swap;
+				}
+			}
+		}
+		
+		return $sortArray;
+	}
 }

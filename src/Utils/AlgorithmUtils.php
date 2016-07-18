@@ -239,8 +239,6 @@ class AlgorithmUtils
 			$cipherTable[mb_substr($alpha, $i, 1)] = mb_substr($cipher, $i, 1);
 		}
 		
-		// $cipherTable['END'] = 'END';
-		
 		// 結果を格納する変数の初期化
 		$afterCipherMsg = "";
 		

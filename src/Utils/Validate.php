@@ -164,30 +164,4 @@ class Validate
 		// 判定結果を返す
 		return $isExistInList;
 	}
-	
-	/*
-	* 大文字英字、スペース判定
-	* true = 大文字英字, false = 大文字英字、スペース以外の文字が含まれている
-	*/
-	public static function isUppercaseAlpha($msg){
-		
-		// 大文字英語とスペースが入った配列を用意
-		$alphaList = ['A', 'B','C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' '];
-		
-		$isUppercaseAlpha = true;
-		
-		// 引数の文字に対して、一文字ずつ分解し、繰り返し比較
-		foreach (str_split($msg) as $msgVal) {
-			
-			// 対象の文字が、大文字英語とスペースの入った配列に含まれていない場合
-			if (!in_array($msgVal, $alphaList)) {
-				
-				// 判定結果を大文字英字以外の文字が入っている（false）に変更
-				$isUppercaseAlpha = false;
-			}
-		}
-		
-		// 判定結果を返す
-		return $isUppercaseAlpha;
-	}
 }

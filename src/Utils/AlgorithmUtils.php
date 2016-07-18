@@ -229,17 +229,17 @@ class AlgorithmUtils
 	*/
 	public static function exeCaesarCipher($msg){
 		
-		// アルファベットのシーザー暗号表を作成する（'アルファベット' => '暗号文字'）
-		$cipherTable = ['A' => 'X', 'B' => 'Y', 'C' => 'Z',
-						'D' => ' ', 'E' => 'A', 'F' => 'B',
-						'G' => 'C', 'H' => 'D', 'I' => 'E',
-						'J' => 'F', 'K' => 'G', 'L' => 'H',
-						'M' => 'I', 'N' => 'J', 'O' => 'K',
-						'P' => 'L', 'Q' => 'M', 'R' => 'N',
-						'S' => 'O', 'T' => 'P', 'U' => 'Q',
-						'V' => 'R', 'W' => 'S', 'X' => 'T',
-						'Y' => 'U', 'Z' => 'V', ' ' => 'W',
-		];
+		// アルファベットと、それに対する暗号文字列を用意する
+		$alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+		$cipher = "XYZ ABCDEFGHIJKLMNOPQRSTUVW";
+		
+		// 用意した文字列を元に、アルファベットのシーザー暗号表を作成する（'アルファベット' => '暗号文字'）
+		for ($i = 0; $i < mb_strlen($alpha); $i++) {
+			
+			$cipherTable[mb_substr($alpha, $i, 1)] = mb_substr($cipher, $i, 1);
+		}
+		
+		// $cipherTable['END'] = 'END';
 		
 		// 結果を格納する変数の初期化
 		$afterCipherMsg = "";
@@ -255,6 +255,20 @@ class AlgorithmUtils
 					
 					// そのアルファベットに対応する暗号文字を結果に入れる
 					$afterCipherMsg = $afterCipherMsg . $cipherVal;
+					
+					// 対応する文字の暗号化が終了したため、次の文字の暗号化処理を行う
+					continue 2;
+				}
+				
+				// 入力値が、大文字英字・スペースではない場合の処理
+				else{
+					
+					// 対応する文字がシーザー暗号表になかった場合
+					if ($cipherVal == end($cipherTable)) {
+						
+						// 対応する文字は、大文字英字・スペースではないため、エラーであることを結果に入れる
+						$afterCipherMsg = "not alpha";
+					}
 				}
 			}
 		}

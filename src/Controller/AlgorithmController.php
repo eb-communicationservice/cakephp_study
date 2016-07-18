@@ -510,20 +510,11 @@ class AlgorithmController extends AppController
 		// 空判定実行
 		$isEmpty = Validate::isEmpty($inputArray);
 		
-		// 大文字英字、スペース判定実行
-		$isUppercaseAlpha = Validate::isUppercaseAlpha($inputArray['msg']);
-		
 		// 入力値に空が含まれている場合
 		if (!$isEmpty) {
 			
 			// エラーメッセージ出力
 			$this->set('errorMsg', "値を入力して下さい");
-		
-		// 大文字英字、スペースではない値が含まれている場合
-		} elseif (!$isUppercaseAlpha) {
-			
-			// エラーメッセージ入力
-			$this->set('errorMsg', "大文字英字、スペースのみを入力して下さい");
 		
 		// 入力値数字の場合
 		} else {
@@ -531,9 +522,21 @@ class AlgorithmController extends AppController
 			// シーザー暗号実行
 			$afterCipherMsg = AlgorithmUtils::exeCaesarCipher($inputArray['msg']);
 			
+			// シーザー暗号実行の結果、入力値に大文字英字・スペースではない文字が含まれていた場合
+			if ($afterCipherMsg == "not alpha") {
+				
+				// エラーメッセージ入力
+				$this->set('errorMsg', "大文字英字、スペースのみを入力して下さい");
+			// シーザー暗号が問題なく実行された場合
+			} else {
+				
+				// viewに結果を送信
+				$this->set('errorMsg', "");
+				$this->set('afterCipherMsg', $afterCipherMsg);
+			}
+			
 			// viewに結果を送信
-			$this->set('errorMsg', "");
-			$this->set('afterCipherMsg', $afterCipherMsg);
+			// $this->set('afterCipherMsg', $afterCipherMsg);
 		}
     }
 }

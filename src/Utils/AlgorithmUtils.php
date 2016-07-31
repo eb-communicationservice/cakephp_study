@@ -272,6 +272,45 @@ class AlgorithmUtils
 	}
 	
 	/*
+	* 14.シーザー暗号
+	* シーザー暗号実行
+	*/
+	public static function exeCaesarCipher($msg){
+		
+		// アルファベットと、それに対する暗号文字列を用意する
+		$alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+		$cipher = "XYZ ABCDEFGHIJKLMNOPQRSTUVW";
+		
+		$mbStrlen = mb_strlen($alpha);
+		
+		// 用意した文字列を元に、アルファベットのシーザー暗号表を作成する（'アルファベット' => '暗号文字'）
+		for ($i = 0; $i < $mbStrlen; $i++) {
+			
+			$cipherTable[mb_substr($alpha, $i, 1)] = mb_substr($cipher, $i, 1);
+		}
+		
+		// 結果を格納する変数の初期化
+		$afterCipherMsg = "";
+		
+		// 引数の文字を一文字ずつ分解して判定
+		foreach (str_split($msg) as $msgVal) {
+			
+			// 対象の文字をシーザー暗号表と照らし合わせる
+			foreach ($cipherTable as $alpha => $cipherVal) {
+				
+				// 対象の文字のアルファベットがあった場合
+				if ($msgVal == $alpha) {
+					
+					// そのアルファベットに対応する暗号文字を結果に入れる
+					$afterCipherMsg = $afterCipherMsg . $cipherVal;
+				}
+			}
+		}
+		
+		return $afterCipherMsg;
+	}
+	
+	/*
 	* 15.バブルソート
 	* バブルソート実行
 	*/

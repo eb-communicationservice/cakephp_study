@@ -224,6 +224,54 @@ class AlgorithmUtils
 	}
 	
 	/*
+	* 13.二分探索
+	* 二分探索実行
+	*/
+	public static function exeBinarySearch($binarySearchNum, $binarySearchArray){
+		
+		// 探索で使う、各値を初期化
+		// 最大値：探索配列最後尾の配列番号
+		$max = count($binarySearchArray) - 1;
+		
+		// 最小値：探索配列先頭の配列番号
+		$min = 0;
+		
+		// 結果を格納する変数（初期値は一致する値がないときに格納する-1にしておく）
+		$resultSearch = -1;
+		
+		// 最小値と最大値が逆転するまで繰り返し探索実行
+		while($min <= $max) {
+			
+			// 中心の値を求める。（intにキャストし、中心の値を少数にならないようにする）
+			$center = (int)(($max + $min) / 2);
+			
+			// 指定した範囲の配列の中心にある値が入力値と等しい場合
+			if ($binarySearchArray[$center] == $binarySearchNum) {
+				
+				// 指定した配列番号を結果に格納
+				$resultSearch = $center;
+				
+				// 探索結果がわかったため、while文を抜ける
+				break;
+			
+			// 指定した範囲の配列の中心にある値が、入力地よりも大きい場合
+			} elseif ($binarySearchArray[$center] > $binarySearchNum) {
+				
+				// 探索値は指定した範囲より小さい範囲に存在するため、最大値を中心値-1に指定する
+				$max = $center -1;
+			
+			// 指定した範囲の配列の中心にある値が、入力地よりも小さい場合
+			} else {
+				
+				// 探索値は指定した範囲より大きい範囲に存在するため、最小値を中心値+1に指定する
+				$min = $center + 1;
+			}
+		}
+		
+		return $resultSearch;
+	}
+	
+	/*
 	* 14.シーザー暗号
 	* シーザー暗号実行
 	*/

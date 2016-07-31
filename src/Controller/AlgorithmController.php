@@ -498,6 +498,49 @@ class AlgorithmController extends AppController
 			$this->set('resultInsertArray', $resultInsertArray);
 		}
     }
+	
+	/*
+	* 13.二分探索
+	*/
+	public function binarySearch(){
+		
+		$binarySearchArray = array(10, 16, 21, 34, 36, 40, 55, 56, 59, 60, 62, 64, 66, 69, 70, 79, 85, 87, 91);
+		
+		// フォームから値を取得
+		$inputArray = array('binarySearchNum' => $this->request->data('binarySearchNum'));
+		
+		// 空判定実行
+		$isEmpty = Validate::isEmpty($inputArray);
+		
+		// 数字判定実行
+		$isNumeric = Validate::isNumeric($inputArray);
+		
+		// viewに挿入する配列を送信
+		$this->set('binarySearchArray', $binarySearchArray);
+		
+		// 入力値に空が含まれている場合
+		if (!$isEmpty) {
+			
+			// viewにエラーメッセージを送信
+			$this->set('errorMsg', "値を入力して下さい");
+		
+		// 入力値に数字ではない値が含まれている場合
+		} elseif (!$isNumeric) {
+			
+			// viewにエラーメッセージを送信
+			$this->set('errorMsg', "数字を入力して下さい");
+		
+		// 入力値数字の場合
+		} else {
+			
+			// 二分探索実行
+			$resultSearch = AlgorithmUtils::exeBinarySearch($inputArray['binarySearchNum'], $binarySearchArray);
+			
+			// viewに結果を送信
+			$this->set('errorMsg', "");
+			$this->set('resultSearch', $resultSearch);
+		}
+	}
     
     /*
 	* 14.シーザー暗号
@@ -515,19 +558,19 @@ class AlgorithmController extends AppController
 		
 		// 入力値に空が含まれている場合
 		if (!$isEmpty) {
-			
-			// エラーメッセージ出力
+		
+			// エラーメッセージ設定
 			$this->set('errorMsg', "値を入力して下さい");
 		
 		// 大文字英字、スペースではない値が含まれている場合
 		} elseif (!$isUppercaseAlpha) {
 			
-			// エラーメッセージ入力
+			// エラーメッセージ設定
 			$this->set('errorMsg', "大文字英字、スペースのみを入力して下さい");
-		
+			
 		// 入力値数字の場合
 		} else {
-			
+		
 			// シーザー暗号実行
 			$afterCipherMsg = AlgorithmUtils::exeCaesarCipher($inputArray['msg']);
 			

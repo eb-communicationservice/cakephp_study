@@ -233,8 +233,10 @@ class AlgorithmUtils
 		$alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 		$cipher = "XYZ ABCDEFGHIJKLMNOPQRSTUVW";
 		
+		$mbStrlen = mb_strlen($alpha);
+		
 		// 用意した文字列を元に、アルファベットのシーザー暗号表を作成する（'アルファベット' => '暗号文字'）
-		for ($i = 0; $i < mb_strlen($alpha); $i++) {
+		for ($i = 0; $i < $mbStrlen; $i++) {
 			
 			$cipherTable[mb_substr($alpha, $i, 1)] = mb_substr($cipher, $i, 1);
 		}
@@ -253,20 +255,6 @@ class AlgorithmUtils
 					
 					// そのアルファベットに対応する暗号文字を結果に入れる
 					$afterCipherMsg = $afterCipherMsg . $cipherVal;
-					
-					// 対応する文字の暗号化が終了したため、次の文字の暗号化処理を行う
-					continue 2;
-				}
-				
-				// 入力値が、大文字英字・スペースではない場合の処理
-				else{
-					
-					// 対応する文字がシーザー暗号表になかった場合
-					if ($cipherVal == end($cipherTable)) {
-						
-						// 対応する文字は、大文字英字・スペースではないため、エラーであることを結果に入れる
-						$afterCipherMsg = "not alpha";
-					}
 				}
 			}
 		}

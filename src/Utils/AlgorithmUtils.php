@@ -342,4 +342,45 @@ class AlgorithmUtils
 		
 		return $sortArray;
 	}
+	
+	/*
+	* 17.選択法
+	* ソート（選択法）実行
+	*/
+	public static function execChoiceSort($sortArray){
+		
+		// 繰り返しのカウンタとして、入力値の配列の長さを設定
+		$cnt = count($sortArray);
+		
+		// 配列内の値の数-1回繰り返し、ソート判定実行
+		for ($i = 0; $i < $cnt - 1; $i++) {
+			
+			// 現在注目している場所の数値を、最小値に設定
+			$minVal = $sortArray[$i];
+			
+			// 現在注目している場所を、最小値を格納する場所に設定
+			$minNum = $i;
+			
+			// 注目している値以降にある値を繰り返し比較していく
+			for ($j = $i + 1; $j < $cnt; $j++) {
+				
+				// 現在設定している最小値よりも小さい値が存在した場合
+				if ($minVal > $sortArray[$j]) {
+					
+					// その場所にある数値を、最小値に再設定
+					$minVal = $sortArray[$j];
+					
+					// その場所を、最小値を格納する場所に再設定
+					$minNum = $j;
+				}
+			}
+			
+			// 注目している場所と、それ以降に見つかった最小値が存在する場所で、それぞれ入っている値を交換する
+			$swap = $sortArray[$i];
+			$sortArray[$i] = $minVal;
+			$sortArray[$minNum] = $swap;
+		}
+		
+		return $sortArray;
+	}
 }

@@ -309,4 +309,37 @@ class AlgorithmUtils
 		
 		return $afterCipherMsg;
 	}
+	
+	/*
+	* 15.バブルソート
+	* バブルソート実行
+	*/
+	public static function execBubbleSort($sortArray){
+		
+		do {
+			
+			// 交換有無フラグ　true:交換あり false:交換なし
+			// 交換有無フラグをfalse（交換なし）に設定
+			$switch = false;
+			
+			// 対象の列の値を、繰り返し判定
+			for ($i = 0; $i < count($sortArray) - 1; $i++) {
+				
+				// 注目している値と隣の値を見比べた結果、注目している値の方が大きい場合
+				if ($sortArray[$i] > $sortArray[$i + 1]) {
+					
+					// 注目している値とその隣の値を入れ替える
+					$swap = $sortArray[$i];
+					$sortArray[$i] = $sortArray[$i + 1];
+					$sortArray[$i + 1] = $swap;
+					
+					// 交換有無フラグをtrue（交換あり）に設定
+					$switch = true;
+				}
+			}
+		// 交換する値がなくなる（交換フラグがfalse（交換なし）になる）まで繰り返し処理
+		} while ($switch == true);
+		
+		return $sortArray;
+	}
 }

@@ -342,4 +342,58 @@ class AlgorithmUtils
 		
 		return $sortArray;
 	}
+	
+	/*
+	* 18.シェルソート
+	* バブルソート実行
+	*/
+	public static function execShellSort($sortArray){
+		
+		// 入力された配列の長さ
+		$cnt = count($sortArray);
+		
+		// 最初に比較に使う間隔を設定
+		$interval = (int)(($cnt - 1) / 2);
+		
+		// 間隔が隣通し（=0）になるまで繰り返し
+		while ($interval > 0) {
+			
+			// 最初の大きさ比較場所を設定
+			$place1 = 0;
+			$place2 = $place1 + $interval;
+			
+			// 比較する場所が配列の長さをはみ出るまで繰り返し比較処理を行う
+			while ($place2 < $cnt) {
+				
+				// 比較している場所の値の大きさが、前の方が小さい場合
+				if ($sortArray[$place1] < $sortArray[$place2]) {
+					
+					// それぞれの値を交換する
+					$swap = $sortArray[$place1];
+					$sortArray[$place1] = $sortArray[$place2];
+					$sortArray[$place2] = $swap;
+					
+					// 前の比較場所から、間隔分戻れる場合
+					if ($place1 - $interval >= 0) {
+						
+						// それぞれの比較場所を間隔分戻す
+						$place1 -= $interval;
+						$place2 = $place1 + $interval;
+					}
+				
+				// 比較している場所の値の大きさが、前の方が大きい場合
+				} else {
+					
+					// それぞれの比較位置を1つ右に移す
+					$place1 += 1;
+					$place2 = $place1 + $interval;
+				}
+			}
+			
+			// 間隔を狭める
+			$interval = (int)($interval / 2);
+		}
+		
+		return $sortArray;
+	}
 }

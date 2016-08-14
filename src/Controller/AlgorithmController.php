@@ -616,4 +616,41 @@ class AlgorithmController extends AppController
 			$this->set('resultSortArray', $resultSortArray);
 		}
 	}
+	
+	/*
+	* 19.ヒープソート
+	*/
+	public function heapSort(){
+		
+		// フォームから値を取得
+		$inputArray = array('str' => $this->request->data('str'));
+		
+		// 入力値から、カンマ区切りで配列に変換
+		$sortArray = split(",", $inputArray['str']);
+		
+		// 空判定実行
+		// 入力値に空が含まれている場合
+		if (!Validate::isEmpty($inputArray)) {
+			
+			// viewにエラーメッセージを送信
+			$this->set('errorMsg', "値を入力して下さい");
+		
+		// 数字判定実行
+		// 入力値に数字ではない値が含まれている場合
+		} elseif (!Validate::isNumeric($sortArray)) {
+			
+			// viewにエラーメッセージを送信
+			$this->set('errorMsg', "数字ではない文字が含まれています");
+		
+		// 入力値数字の場合
+		} else {
+			
+			// ヒープソート実行
+			$resultSortArray = AlgorithmUtils::execHeapSort($sortArray);
+			
+			// viewに結果を送信
+			$this->set('errorMsg', "");
+			$this->set('resultSortArray', $resultSortArray);
+		}
+	}
 }

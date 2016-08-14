@@ -342,4 +342,78 @@ class AlgorithmUtils
 		
 		return $sortArray;
 	}
+	
+	/*
+	* 19.ヒープソート
+	* ヒープソート実行
+	*/
+	public static function execHeapSort($sortArray){
+		
+		// 配列の長さ
+		$cnt = count($sortArray);
+		
+		// 配列の要素数分繰り返し実行
+		for ($i = $cnt - 1; $i >= 0; $i--) {
+			
+			// 親を先頭に設定
+			$parent = 0;
+			
+			// 親の数だけ繰り返し実行
+			while ($parent <= (int)($i / 2)) {
+				
+				// 対象の親に紐づいている子を設定
+				$child1 = $parent * 2;
+				$child2 = $child1 + 1;
+				
+				// 子2が存在しない（子2が比較している要素数より大きい数）場合
+				if ($child2 > $i) {
+					
+					// 子2を子1と同じに設定
+					$child2 = $child1;
+				}
+				
+				// 子同士の要素を比べたとき、子1の方が子2より小さい値になるよう設定
+				if ($sortArray[$child1] > $sortArray[$child2]) {
+					
+					子2の方が子1より小さかった場合、それぞれの要素を交換
+					$swap = $sortArray[$child1];
+					$sortArray[$child1] = $sortArray[$child2];
+					$sortArray[$child2] = $swap;
+				}
+				
+				// 親と子1の要素を比べたとき、親の方が子1より小さい値になるよう設定
+				if ($sortArray[$parent] > $sortArray[$child1]) {
+					
+					// 子1の方が親より小さかった場合、それぞれの値を交換
+					$swap = $sortArray[$parent];
+					$sortArray[$parent] = $sortArray[$child1];
+					$sortArray[$child1] = $swap;
+					
+					// 比較している親の位置を一つ戻してもう一度大小関係を比較する
+					$parent = (int)($parent / 2);
+					
+					// 比較実行した親のイチが先頭だった場合
+					if ($parent < 0) {
+						
+						// 位置はそのまま先頭に設定
+						$parent = 0;
+					}
+				
+				// 子1と親の大小関係が最初から問題なかった場合
+				} else {
+					
+					// 比較対象を次の親に設定
+					$parent = $parent + 1;
+				}
+			}
+			
+			// 先頭と末尾の要素を交換して、末尾を小さい要素に確定させる
+			$swap = $sortArray[0];
+			$sortArray[0] = $sortArray[$i];
+			$sortArray[$i] = $swap;
+			
+		}
+		
+		return $sortArray;
+	}
 }
